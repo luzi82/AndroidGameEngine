@@ -13,7 +13,7 @@ import android.view.SurfaceView;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
-//	final private GameActivity mGameActivity;
+	// final private GameActivity mGameActivity;
 	final private AbstractState mGame;
 	private SurfaceHolder mHolder;
 	// private State mState;
@@ -21,6 +21,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	private boolean mSurfaceAvailable = false;
 	private boolean mRunning = false;
 	private long mRefreshPeriodMs;
+	private boolean mStartDone = false;
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -97,6 +98,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		refreshState();
 	}
 
+	public void onStop() {
+		if (mStartDone) {
+			mGame.onStateEnd();
+		}
+	}
+
 	Timer mTimer;
 
 	private void setTimerEnabled(boolean aEnabled) {
@@ -134,11 +141,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		}
 		mRunning = currentState;
 		if (mRunning) {
+			if (!mStartDone) {
+				mGame.onStateStart();
+			}
 			setTimerEnabled(true);
-			mGame.resume();
+			mGame.onGameResume();
 		} else {
 			setTimerEnabled(false);
-			mGame.pause();
+			mGame.onGamePause();
 		}
 	}
 

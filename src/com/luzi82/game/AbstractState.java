@@ -12,9 +12,13 @@ public abstract class AbstractState {
 
 	public abstract void onKeyUp(int keyCode, KeyEvent msg);
 
-	public abstract void resume();
+	public abstract void onGameResume();
 
-	public abstract void pause();
+	public abstract void onGamePause();
+
+	public abstract void onStateStart();
+
+	public abstract void onStateEnd();
 
 	public abstract void surfaceChanged(int format, int width, int height);
 

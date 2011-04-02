@@ -8,9 +8,11 @@ import android.view.MotionEvent;
 
 public abstract class StateGroup extends AbstractState {
 
-	private TreeMap<String, AbstractState> mStateMap;
+	private TreeMap<String, AbstractState> mStateMap = new TreeMap<String, AbstractState>();
 
 	private AbstractState mCurrentState;
+
+	private boolean mStateStarted = false;
 
 	public void addState(String key, AbstractState state) {
 		mStateMap.put(key, state);
@@ -21,7 +23,13 @@ public abstract class StateGroup extends AbstractState {
 	}
 
 	public void setCurrentState(String key) {
+		if (mStateStarted && (mCurrentState != null)) {
+			mCurrentState.onStateEnd();
+		}
 		mCurrentState = mStateMap.get(key);
+		if (mStateStarted && (mCurrentState != null)) {
+			mCurrentState.onStateStart();
+		}
 	}
 
 	@Override
@@ -53,16 +61,16 @@ public abstract class StateGroup extends AbstractState {
 	}
 
 	@Override
-	public void pause() {
+	public void onGamePause() {
 		if (mCurrentState != null) {
-			mCurrentState.pause();
+			mCurrentState.onGamePause();
 		}
 	}
 
 	@Override
-	public void resume() {
+	public void onGameResume() {
 		if (mCurrentState != null) {
-			mCurrentState.resume();
+			mCurrentState.onGameResume();
 		}
 	}
 
@@ -80,4 +88,19 @@ public abstract class StateGroup extends AbstractState {
 		}
 	}
 
+	@Override
+	public void onStateStart() {
+		mStateStarted = true;
+		if (mCurrentState != null) {
+			mCurrentState.onStateStart();
+		}
+	}
+
+	@Override
+	public void onStateEnd() {
+		mStateStarted = false;
+		if (mCurrentState != null) {
+			mCurrentState.onStateEnd();
+		}
+	}
 }

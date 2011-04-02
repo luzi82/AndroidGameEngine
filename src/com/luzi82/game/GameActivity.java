@@ -39,6 +39,6 @@ public abstract class GameActivity extends Activity {
 
 	abstract protected int getViewId();
 
-	abstract public long getPeriodMs();
+	abstract public int getPeriodMs();
 
 }
