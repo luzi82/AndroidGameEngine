@@ -14,7 +14,7 @@ import android.view.SurfaceView;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 //	final private GameActivity mGameActivity;
-	final private AbstractGame mGame;
+	final private AbstractState mGame;
 	private SurfaceHolder mHolder;
 	// private State mState;
 	private boolean mActive = false;
