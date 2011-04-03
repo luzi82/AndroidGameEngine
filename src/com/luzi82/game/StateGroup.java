@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-public abstract class StateGroup<M extends StateGroup<M, P>, P extends AbstractState<?>>
+public abstract class StateGroup<M extends StateGroup<M, P>, P extends StateParent>
 		extends AbstractState<P> {
 
 	private TreeMap<String, AbstractState<M>> mStateMap = new TreeMap<String, AbstractState<M>>();
