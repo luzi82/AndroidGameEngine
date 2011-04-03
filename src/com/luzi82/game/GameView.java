@@ -143,6 +143,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 		if (mRunning) {
 			if (!mStartDone) {
 				mGame.onStateStart();
+				mStartDone = true;
 			}
 			setTimerEnabled(true);
 			mGame.onGameResume();
