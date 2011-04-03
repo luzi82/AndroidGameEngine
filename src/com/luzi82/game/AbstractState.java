@@ -11,6 +11,10 @@ public abstract class AbstractState<P extends StateParent> implements StateParen
 	protected AbstractState(P parent) {
 		mParent = parent;
 	}
+	
+	public P getParent(){
+		return mParent;
+	}
 
 	public abstract void onTouchEvent(MotionEvent event);
 
