@@ -6,15 +6,20 @@ import android.graphics.Canvas;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-public abstract class StateGroup extends AbstractState {
+public abstract class StateGroup<M extends StateGroup<M, P>, P extends AbstractState<?>>
+		extends AbstractState<P> {
 
-	private TreeMap<String, AbstractState> mStateMap = new TreeMap<String, AbstractState>();
+	private TreeMap<String, AbstractState<M>> mStateMap = new TreeMap<String, AbstractState<M>>();
 
-	private AbstractState mCurrentState;
+	private AbstractState<M> mCurrentState;
 
 	private boolean mStateStarted = false;
 
-	public void addState(String key, AbstractState state) {
+	protected StateGroup(P parent) {
+		super(parent);
+	}
+
+	public void addState(String key, AbstractState<M> state) {
 		mStateMap.put(key, state);
 	}
 

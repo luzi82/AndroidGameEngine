@@ -21,8 +21,8 @@ public abstract class GameActivity extends Activity {
 		view = (GameView) findViewById(getViewId());
 	}
 
-	protected abstract AbstractState createGame();
-	
+	protected abstract AbstractState<?> createGame();
+
 	@Override
 	protected void onResume() {
 		super.onResume();

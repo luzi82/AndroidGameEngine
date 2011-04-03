@@ -4,7 +4,13 @@ import android.graphics.Canvas;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-public abstract class AbstractState {
+public abstract class AbstractState<P extends AbstractState<?>> {
+
+	protected final P mParent;
+
+	protected AbstractState(P parent) {
+		mParent = parent;
+	}
 
 	public abstract void onTouchEvent(MotionEvent event);
 
