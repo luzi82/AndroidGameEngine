@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-public abstract class AbstractState<P extends AbstractState<?>> {
+public abstract class AbstractState<P extends StateParent> implements StateParent {
 
 	protected final P mParent;
 

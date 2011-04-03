@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-public abstract class GameActivity extends Activity {
+public abstract class GameActivity extends Activity implements StateParent {
 
 	GameView view;
 
