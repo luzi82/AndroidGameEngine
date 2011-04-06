@@ -112,6 +112,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 			mTimer.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
+					if (System.currentTimeMillis()
+							- scheduledExecutionTime() > 10)
+						return;
 					synchronized (mGame) {
 						mGame.tick();
 						Canvas c = null;
